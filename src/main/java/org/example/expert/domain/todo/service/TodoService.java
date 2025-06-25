@@ -53,8 +53,6 @@ public class TodoService {
     public Page<TodoResponse> getTodos(int page, int size, String weather, LocalDateTime start, LocalDateTime end) {
         Pageable pageable = PageRequest.of(page - 1, size);
 
-        Page<Todo> todos;
-
         if (weather != null && start != null && end != null) {
             return todoRepository.findByWeatherAndModifiedAtBetween(weather, start, end, pageable)
                     .map(TodoResponse::toDto);
